@@ -1,0 +1,141 @@
+/* Estilos personalizados para COMMUNITY BARBER */
+:root {
+  --primary-dark: #212529;
+  --accent-gold: #d4af37;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+  min-height: 100vh;
+}
+
+.site-header {
+  background: linear-gradient(135deg, #1a1a1a 0%, #434343 100%) !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.site-header h1 i {
+  color: var(--accent-gold);
+}
+
+.card {
+  border-radius: 15px !important;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2) !important;
+}
+
+.card-header {
+  border-top-left-radius: 15px !important;
+  border-top-right-radius: 15px !important;
+  background: linear-gradient(135deg, #1a1a1a 0%, #434343 100%) !important;
+}
+
+.card-header i {
+  color: var(--accent-gold);
+}
+
+.form-label i {
+  color: var(--primary-dark);
+  margin-right: 5px;
+}
+
+.form-control, .form-select {
+  border-radius: 8px;
+  border: 2px solid #e9ecef;
+  transition: all 0.3s ease;
+}
+
+.form-control:focus, .form-select:focus {
+  border-color: var(--primary-dark);
+  box-shadow: 0 0 0 0.2rem rgba(33, 37, 41, 0.15);
+}
+
+.btn-dark {
+  background: linear-gradient(135deg, #1a1a1a 0%, #434343 100%);
+  border: none;
+  border-radius: 8px;
+  padding: 12px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-dark:hover {
+  transform: scale(1.02);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+.btn-outline-secondary {
+  border-radius: 8px;
+  border: 2px solid #6c757d;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-outline-secondary:hover {
+  transform: scale(1.02);
+}
+
+#message {
+  padding: 12px;
+  border-radius: 8px;
+  text-align: center;
+  font-weight: 600;
+  animation: slideIn 0.3s ease;
+}
+
+#message.alert-success {
+  background-color: #d4edda;
+  border: 2px solid #c3e6cb;
+  color: #155724;
+}
+
+#message.alert-danger {
+  background-color: #f8d7da;
+  border: 2px solid #f5c6cb;
+  color: #721c24;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.site-footer {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%) !important;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.site-footer i {
+  color: #28a745;
+}
+
+/* Animación sutil para inputs */
+.form-control, .form-select {
+  transition: all 0.3s ease;
+}
+
+.form-control:hover, .form-select:hover {
+  border-color: #adb5bd;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .site-header h1 {
+    font-size: 2rem;
+  }
+  
+  .card-body {
+    padding: 1.5rem !important;
+  }
+}
