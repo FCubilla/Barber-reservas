@@ -32,7 +32,7 @@
     }, 4000);
   }
 
-  function generateTimeOptions(startHour=9, endHour=18, intervalMin=30){
+  function generateTimeOptions(startHour=9, endHour=18, intervalMin=30, occupiedTimes=[]){
     timeSelect.innerHTML = '<option value="">Seleccioná una hora</option>';
     for(let h=startHour; h<=endHour; h++){
       for(let m=0; m<60; m+=intervalMin){
@@ -41,10 +41,36 @@
         const val = `${hh}:${mm}`;
         const opt = document.createElement('option');
         opt.value = val;
-        opt.textContent = val;
+        
+        // Deshabilitar si está ocupado
+        if(occupiedTimes.includes(val)){
+          opt.disabled = true;
+          opt.textContent = `${val} (Ocupado)`;
+          opt.style.color = '#999';
+        } else {
+          opt.textContent = val;
+        }
+        
         timeSelect.appendChild(opt);
       }
     }
+  }
+
+  function getOccupiedTimes(date){
+    if(!date) return [];
+    const bookings = getBookings();
+    return bookings
+      .filter(b => b.date === date)
+      .map(b => b.time);
+  }
+
+  function updateAvailableTimes(){
+    const selectedDate = dateInput.value;
+    const occupiedTimes = getOccupiedTimes(selectedDate);
+    generateTimeOptions(9, 17, 30, occupiedTimes);
+    
+    // Resetear selección de hora al cambiar fecha
+    timeSelect.value = '';
   }
 
   function deleteBooking(id){
@@ -136,6 +162,9 @@
     generateTimeOptions(9,17,30); // horario 09:00 - 17:30
     setMinDate();
     form.addEventListener('submit', onSubmit);
+    
+    // Actualizar horarios disponibles cuando cambie la fecha
+    dateInput.addEventListener('change', updateAvailableTimes);
   });
 
 })();
