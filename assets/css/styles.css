@@ -6,7 +6,9 @@
 
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+  background:
+    linear-gradient(rgba(26, 26, 26, 0.45), rgba(26, 26, 26, 0.45)),
+    url('../img/barber-peluquero.jpeg') center 20%/cover no-repeat fixed;
   min-height: 100vh;
 }
 
@@ -19,9 +21,26 @@ body {
   color: var(--accent-gold);
 }
 
+.brand-wrap {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.brand-logo {
+  width: 72px;
+  height: 72px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid var(--accent-gold);
+}
+
 .card {
+  background-color: rgba(255, 255, 255, 0.62);
   border-radius: 15px !important;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  backdrop-filter: blur(6px);
 }
 
 .card:hover {
@@ -32,7 +51,7 @@ body {
 .card-header {
   border-top-left-radius: 15px !important;
   border-top-right-radius: 15px !important;
-  background: linear-gradient(135deg, #1a1a1a 0%, #434343 100%) !important;
+  background: linear-gradient(135deg, rgba(26, 26, 26, 0.68) 0%, rgba(67, 67, 67, 0.68) 100%) !important;
 }
 
 .card-header i {
@@ -131,10 +150,20 @@ body {
 
 /* Responsive */
 @media (max-width: 768px) {
+  .brand-wrap {
+    justify-content: center;
+    text-align: center;
+  }
+
+  .brand-logo {
+    width: 64px;
+    height: 64px;
+  }
+
   .site-header h1 {
     font-size: 2rem;
   }
-  
+
   .card-body {
     padding: 1.5rem !important;
   }

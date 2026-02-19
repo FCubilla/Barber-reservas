@@ -11,14 +11,17 @@
 	<body>
 		<header class="site-header bg-dark text-white py-5">
 			<div class="container">
-				<h1 class="display-4 fw-bold"><i class="bi bi-scissors"></i> COMMUNITY BARBER</h1>
+				<div class="brand-wrap">
+					<img src="assets/img/barber-logo.jpeg" alt="Logo de Community Barber" class="brand-logo" />
+					<h1 class="display-4 fw-bold"><i class="bi bi-scissors"></i> COMMUNITY BARBER</h1>
+				</div>
 				<p class="lead mt-3">Reservá tu turno de forma rápida y sencilla</p>
 			</div>
 		</header>
 
 		<main class="container my-5">
-			<div class="row justify-content-center">
-				<div class="col-lg-6 col-md-8">
+			<div class="row justify-content-center justify-content-lg-end">
+				<div class="col-lg-6 col-md-8 ms-lg-auto">
 					<div class="card shadow-lg border-0">
 						<div class="card-header bg-dark text-white text-center py-3">
 							<h2 class="mb-0"><i class="bi bi-calendar-check"></i> Reservar Turno</h2>
@@ -63,6 +66,19 @@
 								</div>
 							</form>
 							<div id="message" class="mt-3" aria-live="polite"></div>
+						</div>
+					</div>
+
+					<div class="card shadow-lg border-0 mt-4">
+						<div class="card-header bg-dark text-white text-center py-3">
+							<h3 class="h5 mb-0"><i class="bi bi-clock-history"></i> Horarios de atención</h3>
+						</div>
+						<div class="card-body p-4">
+							<ul class="list-unstyled mb-0">
+								<li class="d-flex justify-content-between py-1"><span class="fw-semibold">Martes a Viernes</span><span>09:00 - 20:00</span></li>
+								<li class="d-flex justify-content-between py-1"><span class="fw-semibold">Sábados</span><span>09:00 - 18:00</span></li>
+								<li class="d-flex justify-content-between py-1"><span class="fw-semibold">Lunes y Domingos</span><span>Cerrado</span></li>
+							</ul>
 						</div>
 					</div>
 				</div>

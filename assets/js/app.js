@@ -64,8 +64,35 @@
       .map(b => b.time);
   }
 
+  function isClosedDay(date){
+    if(!date) return false;
+    const selectedDate = new Date(date + 'T00:00:00');
+    const day = selectedDate.getDay();
+    return day === 0 || day === 1;
+  }
+
+  function getNextOpenDateISO(fromDate){
+    const base = fromDate ? new Date(fromDate + 'T00:00:00') : new Date();
+    base.setHours(0,0,0,0);
+
+    while(base.getDay() === 0 || base.getDay() === 1){
+      base.setDate(base.getDate() + 1);
+    }
+
+    return base.toISOString().slice(0,10);
+  }
+
   function updateAvailableTimes(){
-    const selectedDate = dateInput.value;
+    let selectedDate = dateInput.value;
+
+    if(isClosedDay(selectedDate)){
+      const nextOpenDate = getNextOpenDateISO(selectedDate);
+      dateInput.value = nextOpenDate;
+      selectedDate = nextOpenDate;
+      showMessage('Lunes y domingos está cerrado. Te movimos al próximo día disponible.', 'error');
+    }
+
+    timeSelect.disabled = false;
     const occupiedTimes = getOccupiedTimes(selectedDate);
     generateTimeOptions(9, 17, 30, occupiedTimes);
     
@@ -98,6 +125,11 @@
     const selected = new Date(date + 'T00:00:00');
     if(selected < today){
       showMessage('La fecha seleccionada ya pasó', 'error');
+      return;
+    }
+
+    if(isClosedDay(date)){
+      showMessage('La barbería está cerrada lunes y domingos. Elegí otro día.', 'error');
       return;
     }
 
@@ -152,15 +184,18 @@
   }
 
   function setMinDate(){
-    const today = new Date();
-    const iso = today.toISOString().slice(0,10);
-    dateInput.min = iso;
+    const nextOpenDate = getNextOpenDateISO();
+    dateInput.min = nextOpenDate;
+
+    if(!dateInput.value || new Date(dateInput.value + 'T00:00:00') < new Date(nextOpenDate + 'T00:00:00') || isClosedDay(dateInput.value)){
+      dateInput.value = nextOpenDate;
+    }
   }
 
   // Inicialización
   document.addEventListener('DOMContentLoaded', ()=>{
-    generateTimeOptions(9,17,30); // horario 09:00 - 17:30
     setMinDate();
+    updateAvailableTimes();
     form.addEventListener('submit', onSubmit);
     
     // Actualizar horarios disponibles cuando cambie la fecha
