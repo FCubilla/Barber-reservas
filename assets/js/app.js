@@ -163,13 +163,17 @@
 
   function sendToGoogleSheets(booking){
     const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzf2dF4E6IiBRhKE6xHFyD-3HwE3hi0YYDEFFUsX2xR5Yd4JiZDBW25O5sY6TFbsIiOHg/exec';
-    const payload = new URLSearchParams({
+    const payload = {
       name: booking.name,
       phone: booking.phone,
       service: booking.service,
       date: booking.date,
       time: booking.time
-    });
+    };
+
+    const query = Object.keys(payload)
+      .map((key) => `${encodeURIComponent(key)}=${encodeURIComponent(payload[key] || '')}`)
+      .join('&');
     
     fetch(GOOGLE_SCRIPT_URL, {
       method: 'POST',
@@ -177,10 +181,14 @@
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
       },
-      body: payload.toString()
+      body: query,
+      keepalive: true
     }).catch(err => {
       console.error('Error enviando a Google Sheets:', err);
-      // No mostramos error al usuario para no confundirlo
+
+      // Fallback para mejorar compatibilidad en algunos navegadores móviles
+      const img = new Image();
+      img.src = `${GOOGLE_SCRIPT_URL}?${query}`;
     });
   }
 
