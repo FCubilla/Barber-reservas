@@ -163,20 +163,21 @@
 
   function sendToGoogleSheets(booking){
     const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzf2dF4E6IiBRhKE6xHFyD-3HwE3hi0YYDEFFUsX2xR5Yd4JiZDBW25O5sY6TFbsIiOHg/exec';
+    const payload = new URLSearchParams({
+      name: booking.name,
+      phone: booking.phone,
+      service: booking.service,
+      date: booking.date,
+      time: booking.time
+    });
     
     fetch(GOOGLE_SCRIPT_URL, {
       method: 'POST',
       mode: 'no-cors',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
       },
-      body: JSON.stringify({
-        name: booking.name,
-        phone: booking.phone,
-        service: booking.service,
-        date: booking.date,
-        time: booking.time
-      })
+      body: payload.toString()
     }).catch(err => {
       console.error('Error enviando a Google Sheets:', err);
       // No mostramos error al usuario para no confundirlo
