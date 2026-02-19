@@ -162,7 +162,7 @@
   }
 
   function sendToGoogleSheets(booking){
-    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxI2eBVp34TUyytWU74t3-U-095Wwfg7btYHA2OfakA7K4sRSeHGN8jzxvrhQAR1KmuSw/exec';
+    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzf2dF4E6IiBRhKE6xHFyD-3HwE3hi0YYDEFFUsX2xR5Yd4JiZDBW25O5sY6TFbsIiOHg/exec';
     
     fetch(GOOGLE_SCRIPT_URL, {
       method: 'POST',
